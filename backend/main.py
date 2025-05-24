@@ -226,7 +226,7 @@ if "alertas" in resultado:
         print(f"- {t['nombre']} ({t['ocupadas']}/{t['capacidad']}) → {t['porcentaje_ocupacion']}%")
 else:
     print(resultado["message"])
-'''
+
 
 ctrl = TerminalController()
 
@@ -238,7 +238,7 @@ if resultado["success"]:
         print(f"- {t['nombre']} | Bicicletas disponibles: {t['ocupadas']} | Espacios libres: {t['espacios_libres']} / {t['capacidad']}")
 else:
     print(resultado["message"])
-
+'''
 
 if __name__ == "__main__":
     main()
