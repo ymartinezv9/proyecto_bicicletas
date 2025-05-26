@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Cambiar Terminal de Destino</title>
+  <link rel="stylesheet" href="../css/estilos.css">
+</head>
+<body>
+  <div class="form-container">
+    <h2>Cambiar Terminal de Destino</h2>
+
+    <p>Destino actual: <strong id="destinoActual">Cargando...</strong></p>
+
+    <form id="formDestino">
+      <label for="nuevaTerminal">Nueva Terminal de Destino:</label>
+      <select id="nuevaTerminal" required></select>
+      <button type="submit">Guardar Cambio</button>
+    </form>
+
+    <p><a href="dashboard.html">Volver al Panel</a></p>
+  </div>
+
+  <script src="../js/cambiar_destino.js"></script>
+</body>
+</html>
