@@ -51,3 +51,16 @@ class ReservaController:
         resultado = self.reservaModel.cambiarDestino(usuario_id, nueva_terminal_id)
         self.reservaModel.cerrarConexion()
         return resultado
+    def obtenerReservaActiva(self, usuario_id):
+        reserva = self.reservaModel.obtenerReservaActivaConDestino(usuario_id)
+        self.reservaModel.cerrarConexion()
+
+        if not reserva:
+            return {"success": False, "message": "No tienes reservas activas."}
+        
+        return {
+            "success": True,
+            "reserva": {
+                "destino": reserva["terminal_destino"]
+            }
+        }

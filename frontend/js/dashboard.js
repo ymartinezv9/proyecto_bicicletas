@@ -21,6 +21,8 @@ document.addEventListener('DOMContentLoaded', () => {
           <li><a href="devolver.html">Devolver Bicicleta</a></li>
           <li><a href="historial.html">Ver Historial</a></li>
           <li><a href="preferencias.html">Preferencias</a></li>
+          <li><a href="cambiar_destino.html" class="btn">Cambiar Terminal de Destino</a></li>
+
         </ul>
       `;
       break;

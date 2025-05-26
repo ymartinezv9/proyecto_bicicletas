@@ -14,6 +14,7 @@ usuarioCtrl = UsuarioController()
 reservaCtrl = ReservaController()
 terminalCtrl = TerminalController()
 preferenciasCtrl = PreferenciasController()
+reservaCtrl = ReservaController()
 
 @app.route('/api/registro', methods=['POST'])
 def registrar_usuario():
@@ -81,6 +82,23 @@ def set_notificaciones():
 def set_ruta_favorita():
     datos = request.json
     return jsonify(preferenciasCtrl.agregarRutaFavorita(datos['usuario_id'], datos['origen_id'], datos['destino_id']))
+
+@app.route('/api/reservas/usuario/<int:usuario_id>', methods=['GET'])
+def obtener_reserva_activa(usuario_id):
+    # Lógica para mostrar terminal destino actual
+    resultado = reservaCtrl.obtenerReservaActiva(usuario_id)
+    return jsonify(resultado)
+
+@app.route('/api/reservas/cambiar-destino', methods=['POST'])
+def cambiar_terminal_destino():
+    datos = request.json
+    resultado = reservaCtrl.modificarTerminalDestino(
+        datos['usuario_id'],
+        datos['nueva_terminal_id']
+    )
+    return jsonify(resultado)
+
+
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)

@@ -171,6 +171,18 @@ class ReservaModel:
         self.db.commit()
 
         return {"success": True, "message": "Terminal de destino actualizada exitosamente."}
+    def obtenerReservaActivaConDestino(self, usuario_id):
+        query = """
+        SELECT r.id, t.nombre AS terminal_destino
+        FROM reservas r
+        JOIN terminales t ON r.terminal_destino_id = t.id
+        WHERE r.usuario_id = %s AND r.estado = 'Activa'
+        LIMIT 1
+        """
+        self.cursor.execute(query, (usuario_id,))
+        return self.cursor.fetchone()
+
+
 
     def cerrarConexion(self):
         self.cursor.close()
