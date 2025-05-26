@@ -6,9 +6,6 @@ class PreferenciasModel:
         self.cursor = self.db.cursor(dictionary=True)
 
     def actualizarNotificaciones(self, usuario_id, estado):
-        self.db = DBConnection().conectar()
-        self.cursor = self.db.cursor(dictionary=True)
-
         query = """
         INSERT INTO preferencias (usuario_id, notificaciones)
         VALUES (%s, %s)
@@ -16,22 +13,18 @@ class PreferenciasModel:
         """
         self.cursor.execute(query, (usuario_id, estado))
         self.db.commit()
+        return {"success": True, "message": "Notificaciones actualizadas correctamente."}
 
     def agregarRutaFavorita(self, usuario_id, origen_id, destino_id):
-        self.db = DBConnection().conectar()
-        self.cursor = self.db.cursor(dictionary=True)
-
         query = """
         INSERT INTO rutas_favoritas (usuario_id, terminal_origen_id, terminal_destino_id)
         VALUES (%s, %s, %s)
         """
         self.cursor.execute(query, (usuario_id, origen_id, destino_id))
         self.db.commit()
+        return {"success": True, "message": "Ruta favorita agregada correctamente."}
 
     def obtenerPreferencias(self, usuario_id):
-        self.db = DBConnection().conectar()
-        self.cursor = self.db.cursor(dictionary=True)
-        
         self.cursor.execute("SELECT notificaciones FROM preferencias WHERE usuario_id = %s", (usuario_id,))
         prefs = self.cursor.fetchone()
 
@@ -44,7 +37,10 @@ class PreferenciasModel:
         """, (usuario_id,))
         rutas = self.cursor.fetchall()
 
-        return {"notificaciones": prefs['notificaciones'] if prefs else True, "rutas_favoritas": rutas}
+        return {
+            "notificaciones": prefs['notificaciones'] if prefs else True,
+            "rutas_favoritas": rutas
+        }
 
     def cerrarConexion(self):
         self.cursor.close()

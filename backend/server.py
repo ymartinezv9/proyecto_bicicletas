@@ -61,6 +61,11 @@ def devolver_bicicleta():
     return jsonify(resultado)
 
 
+@app.route('/api/historial/<int:usuario_id>', methods=['GET'])
+def historial_usuario(usuario_id):
+    resultado = reservaCtrl.verHistorial(usuario_id)
+    return jsonify(resultado)
+
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
