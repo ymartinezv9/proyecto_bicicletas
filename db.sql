@@ -69,8 +69,6 @@ INSERT INTO bicicletas (codigo, estado, terminal_id) VALUES
 ('BIKE005', 'Mantenimiento', 2),
 ('BIKE006', 'Disponible', 3);
 
-
-
 SELECT id, nombre, correo FROM usuarios;
 
 SELECT * FROM terminales;
@@ -99,21 +97,22 @@ CREATE TABLE mensajes_soporte (
     FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
 );
 
+
 CREATE TABLE preferencias (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    usuario_id INT UNIQUE,
-    notificaciones BOOLEAN DEFAULT TRUE,
-    FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
+  usuario_id INT PRIMARY KEY,
+  notificaciones BOOLEAN DEFAULT FALSE,
+  FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
 );
 
+
 CREATE TABLE rutas_favoritas (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    usuario_id INT,
-    terminal_origen_id INT,
-    terminal_destino_id INT,
-    FOREIGN KEY (usuario_id) REFERENCES usuarios(id),
-    FOREIGN KEY (terminal_origen_id) REFERENCES terminales(id),
-    FOREIGN KEY (terminal_destino_id) REFERENCES terminales(id)
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  usuario_id INT NOT NULL,
+  terminal_origen_id INT NOT NULL,
+  terminal_destino_id INT NOT NULL,
+  FOREIGN KEY (usuario_id) REFERENCES usuarios(id),
+  FOREIGN KEY (terminal_origen_id) REFERENCES terminales(id),
+  FOREIGN KEY (terminal_destino_id) REFERENCES terminales(id)
 );
 
 ALTER TABLE reservas
@@ -133,5 +132,9 @@ UPDATE bicicletas SET latitud = 14.6349, longitud = -90.5069 WHERE id = 1;
 UPDATE bicicletas SET latitud = 14.6123, longitud = -90.5150 WHERE id = 2;
 UPDATE bicicletas SET latitud = 14.5896, longitud = -90.4872 WHERE id = 3;
 
-DESCRIBE usuarios;
+
+
+
+
+
 

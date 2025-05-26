@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 
+from controllers.preferenciasController import PreferenciasController
 from controllers.usuarioController import UsuarioController
 from controllers.reservaController import ReservaController
 from controllers.terminalController import TerminalController
@@ -12,6 +13,7 @@ CORS(app)  # Permite solicitudes desde cualquier origen (frontend)
 usuarioCtrl = UsuarioController()
 reservaCtrl = ReservaController()
 terminalCtrl = TerminalController()
+preferenciasCtrl = PreferenciasController()
 
 @app.route('/api/registro', methods=['POST'])
 def registrar_usuario():
@@ -66,6 +68,19 @@ def historial_usuario(usuario_id):
     resultado = reservaCtrl.verHistorial(usuario_id)
     return jsonify(resultado)
 
+@app.route('/api/preferencias/<int:usuario_id>', methods=['GET'])
+def get_preferencias(usuario_id):
+    return jsonify(preferenciasCtrl.verPreferencias(usuario_id))
+
+@app.route('/api/preferencias/notificaciones', methods=['POST'])
+def set_notificaciones():
+    datos = request.json
+    return jsonify(preferenciasCtrl.cambiarNotificaciones(datos['usuario_id'], datos['activar']))
+
+@app.route('/api/preferencias/ruta', methods=['POST'])
+def set_ruta_favorita():
+    datos = request.json
+    return jsonify(preferenciasCtrl.agregarRutaFavorita(datos['usuario_id'], datos['origen_id'], datos['destino_id']))
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)

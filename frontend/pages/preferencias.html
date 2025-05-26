@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Preferencias del Usuario</title>
+  <link rel="stylesheet" href="../css/estilos.css">
+</head>
+<body>
+  <div class="form-container">
+    <h2>Configuración de Preferencias</h2>
+
+    <label>
+      <input type="checkbox" id="notificaciones" />
+      Activar notificaciones
+    </label>
+    <button id="btnGuardarNotificaciones">Guardar</button>
+
+    <hr>
+
+    <h3>Agregar Ruta Favorita</h3>
+    <form id="formRuta">
+      <label>Terminal Origen:</label>
+      <select id="origen" required></select>
+
+      <label>Terminal Destino:</label>
+      <select id="destino" required></select>
+
+      <button type="submit">Agregar Ruta</button>
+    </form>
+
+    <hr>
+
+    <h3>Rutas Favoritas Registradas</h3>
+    <ul id="listaRutas"></ul>
+    
+
+    <p><a href="dashboard.html">Volver al Panel</a></p>
+  </div>
+
+  <script src="../js/preferencias.js"></script>
+</body>
+</html>
