@@ -98,6 +98,10 @@ def cambiar_terminal_destino():
     )
     return jsonify(resultado)
 
+@app.route('/api/reportar_problema', methods=['POST'])
+def reportar_problema():
+    datos = request.json
+    return jsonify(reservaCtrl.reportarProblema(datos['usuario_id'], datos['descripcion']))
 
 
 if __name__ == '__main__':

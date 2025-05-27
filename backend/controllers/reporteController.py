@@ -4,12 +4,13 @@ class ReporteController:
     def __init__(self):
         self.reporteModel = ReporteModel()
 
-    def reportarProblema(self, usuario_id, bicicleta_id, tipo_problema, descripcion=""):
-        if not tipo_problema:
-            return {"success": False, "message": "Debe seleccionar un tipo de problema."}
+    def reportarProblemas(self, usuario_id, descripcion):
+        reserva = self.reservaModel.obtenerReservaActivaConDestino(usuario_id)
+        if not reserva:
+            return {"success": False, "message": "No tienes ninguna bicicleta activa para reportar."}
 
-        resultado = self.reporteModel.crearReporte(usuario_id, bicicleta_id, tipo_problema, descripcion)
-        self.reporteModel.cerrarConexion()
+        resultado = self.reservaModel.guardarReporte(usuario_id, descripcion)
+        self.reservaModel.cerrarConexion()
         return resultado
 
     def verReportes(self, estado_filtro=None):

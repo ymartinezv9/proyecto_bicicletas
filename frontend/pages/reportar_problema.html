@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Reportar Problema</title>
+  <link rel="stylesheet" href="../css/estilos.css">
+</head>
+<body>
+  <div class="form-container">
+    <h2>Reportar Problema con Bicicleta</h2>
+
+    <form id="formReporte">
+      <label for="problema">Selecciona el problema:</label>
+      <select id="problema" required>
+        <option value="">-- Elige una opción --</option>
+        <option value="Frenos">Frenos</option>
+        <option value="Llantas">Llantas</option>
+        <option value="Cadena">Cadena</option>
+        <option value="Manubrio">Manubrio</option>
+        <option value="Otro">Otro</option>
+      </select>
+
+      <button type="submit">Enviar Reporte</button>
+    </form>
+
+    <p><a href="dashboard.html">Volver al Panel</a></p>
+  </div>
+
+  <script src="../js/reportar_problema.js"></script>
+</body>
+</html>

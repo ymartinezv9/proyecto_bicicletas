@@ -83,7 +83,7 @@ bicicleta_id = int(input("ID de la bicicleta: "))
 tipo_problema = input("Tipo de problema (frenos, llantas, cadena, etc.): ")
 descripcion = input("Descripción adicional (opcional): ")
 
-resultado = reporteCtrl.reportarProblema(usuario_id, bicicleta_id, tipo_problema, descripcion)
+resultado = reporteCtrl.reportarProblemas(usuario_id, bicicleta_id, tipo_problema, descripcion)
 print(resultado)
 
 reporteCtrl = ReporteController()

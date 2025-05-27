@@ -172,6 +172,8 @@ class ReservaModel:
 
         return {"success": True, "message": "Terminal de destino actualizada exitosamente."}
     def obtenerReservaActivaConDestino(self, usuario_id):
+        self.db = DBConnection().conectar()
+        self.cursor = self.db.cursor(dictionary=True)
         query = """
         SELECT r.id, t.nombre AS terminal_destino
         FROM reservas r
@@ -181,6 +183,17 @@ class ReservaModel:
         """
         self.cursor.execute(query, (usuario_id,))
         return self.cursor.fetchone()
+
+    def guardarReporte(self, usuario_id, descripcion):
+        self.db = DBConnection().conectar()
+        self.cursor = self.db.cursor(dictionary=True)
+        query = """
+        INSERT INTO reportar_problema (usuario_id, descripcion, fecha_reporte)
+        VALUES (%s, %s, NOW())
+        """
+        self.cursor.execute(query, (usuario_id, descripcion))
+        self.db.commit()
+        return {"success": True, "message": "Reporte enviado correctamente."}
 
 
 

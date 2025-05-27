@@ -64,3 +64,11 @@ class ReservaController:
                 "destino": reserva["terminal_destino"]
             }
         }
+    def reportarProblema(self, usuario_id, descripcion):
+        reserva = self.reservaModel.obtenerReservaActivaConDestino(usuario_id)
+        if not reserva:
+            return {"success": False, "message": "No tienes ninguna bicicleta activa para reportar."}
+
+        resultado = self.reservaModel.guardarReporte(usuario_id, descripcion)
+        self.reservaModel.cerrarConexion()
+        return resultado
