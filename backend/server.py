@@ -16,6 +16,7 @@ terminalCtrl = TerminalController()
 preferenciasCtrl = PreferenciasController()
 reservaCtrl = ReservaController()
 
+
 @app.route('/api/registro', methods=['POST'])
 def registrar_usuario():
     datos = request.json
@@ -106,3 +107,4 @@ def reportar_problema():
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
+ 
