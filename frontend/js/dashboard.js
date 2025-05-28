@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <li><a href="cambiar_destino.html" class="btn">Cambiar Terminal de Destino</a></li>
           <li><a href="reportar_problema.html">Reportar Problema</a></li>
           <li><a href="disponibilidad.html">Consultar Disponibilidad</a></li>
-
+          <li><a href="espacios.html">Verificar Espacio para Devolución</a></li>
         </ul>
       `;
       break;

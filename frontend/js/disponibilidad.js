@@ -15,7 +15,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     terminales.forEach(t => {
       const disponibles = t.ocupadas;
       const ocupacion = ((disponibles / t.capacidad) * 100).toFixed(1);
-
+      
+      
       const fila = document.createElement("tr");
       fila.innerHTML = `
         <td>${t.nombre}</td>

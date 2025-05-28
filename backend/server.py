@@ -104,6 +104,22 @@ def reportar_problema():
     datos = request.json
     return jsonify(reservaCtrl.reportarProblema(datos['usuario_id'], datos['descripcion']))
 
+@app.route('/api/terminal/<int:terminal_id>/espacio', methods=['GET'])
+def verificar_espacio_terminal(terminal_id):
+    from models.terminalModel import TerminalModel
+    terminalModel = TerminalModel()
+    query = "SELECT capacidad, ocupadas FROM terminales WHERE id = %s"
+    terminalModel.cursor.execute(query, (terminal_id,))
+    terminal = terminalModel.cursor.fetchone()
+    terminalModel.cerrarConexion()
+
+    if not terminal:
+        return jsonify({"success": False, "message": "Terminal no encontrada"})
+
+    if terminal['ocupadas'] >= terminal['capacidad']:
+        return jsonify({"success": False, "message": "No hay espacio disponible en esta terminal."})
+    else:
+        return jsonify({"success": True, "message": "Sí hay espacio disponible para devolución."})
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
