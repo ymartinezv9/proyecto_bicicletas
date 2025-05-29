@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Rutas Recomendadas y Clima</title>
+  <link rel="stylesheet" href="../css/estilos.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <style>
+    #map {
+      height: 400px;
+      margin-bottom: 20px;
+    }
+    .mensaje-error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>Clima Actual y Rutas Recomendadas</h2>
+
+    <div id="clima">
+      <h3>Clima Actual</h3>
+      <p id="estadoClima">Cargando clima...</p>
+    </div>
+
+    <div id="map"></div>
+
+    <div id="rutas">
+      <h3>Rutas Sugeridas</h3>
+      <ul id="listaRutas">
+        <li>Cargando rutas...</li>
+      </ul>
+    </div>
+
+    <p><a href="dashboard.html">Volver al Panel</a></p>
+  </div>
+
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="../js/rutas.js"></script>
+</body>
+</html>

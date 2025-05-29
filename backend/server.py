@@ -121,6 +121,57 @@ def verificar_espacio_terminal(terminal_id):
     else:
         return jsonify({"success": True, "message": "Sí hay espacio disponible para devolución."})
 
+
+import requests
+import os
+
+@app.route('/api/clima', methods=['GET'])
+def obtener_clima():
+    # Usa tu propia API key aquí
+    api_key = os.getenv("OPENWEATHER_API_KEY", "edf3f9680b1a391f6309d2b920c7156b")  # Reemplaza con tu API key real
+    ciudad = "Guatemala"  # Puedes cambiarlo si gustas
+
+    url = f"https://api.openweathermap.org/data/2.5/weather?q={ciudad}&appid={api_key}&units=metric&lang=es"
+
+    try:
+        response = requests.get(url)
+        data = response.json()
+
+        temperatura = data["main"]["temp"]
+        descripcion = data["weather"][0]["description"]
+
+        return jsonify({
+            "temperatura": temperatura,
+            "descripcion": descripcion.capitalize()
+        })
+    except Exception as e:
+        return jsonify({
+            "temperatura": None,
+            "descripcion": "No se pudo obtener el clima"
+        }), 500
+
+
+@app.route('/api/rutas-sugeridas', methods=['GET'])
+def rutas_sugeridas():
+    from models.terminalModel import TerminalModel
+    modelo = TerminalModel()
+    query = """
+    SELECT 
+      t1.nombre AS origen,
+      t2.nombre AS destino
+    FROM terminales t1
+    JOIN terminales t2 ON t1.id != t2.id
+    WHERE
+      (SELECT COUNT(*) FROM bicicletas WHERE terminal_id = t1.id AND estado = 'Disponible') > 0
+      AND (SELECT capacidad - ocupadas FROM terminales WHERE id = t2.id) > 0
+    LIMIT 5
+    """
+    modelo.cursor.execute(query)
+    rutas = modelo.cursor.fetchall()
+    modelo.cerrarConexion()
+    return jsonify(rutas)
+
+
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
  
