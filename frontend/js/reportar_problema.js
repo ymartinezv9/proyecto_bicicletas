@@ -1,54 +1,79 @@
-document.addEventListener("DOMContentLoaded", async () => {
-  const usuario = JSON.parse(localStorage.getItem("usuario"));
-  const form = document.getElementById("formReporte");
-
+document.addEventListener('DOMContentLoaded', async () => {
+  const usuario = JSON.parse(localStorage.getItem('usuario'));
   if (!usuario) {
-    alert("Inicia sesión para reportar problemas.");
-    window.location.href = "login.html";
+    alert("Inicia sesión.");
+    window.location.href = 'login.html';
     return;
   }
 
-  // Verificar si el usuario tiene una bicicleta activa
+  const selectBici = document.getElementById('bicicleta_id');
+  const infoBicicleta = document.getElementById('infoBicicleta');
+  let bicicletasMap = {};
+
+  // Cargar bicicletas activas
   try {
-    const res = await fetch(`http://localhost:5000/api/reservas/usuario/${usuario.id}`);
-    const data = await res.json();
+    const res = await fetch('http://localhost:5000/api/bicicletas/activas');
+    const bicicletas = await res.json();
 
-    if (!data.success || !data.reserva) {
-      alert("No tienes ninguna bicicleta activa para reportar.");
-      form.style.display = "none";
-      return;
+    bicicletas.forEach(b => {
+      bicicletasMap[b.id] = b;
+
+      const opt = document.createElement('option');
+      opt.value = b.id;
+      opt.textContent = `${b.codigo}`;
+      selectBici.appendChild(opt);
+    });
+
+    if (bicicletas.length === 0) {
+      const opt = document.createElement('option');
+      opt.disabled = true;
+      opt.textContent = 'No hay bicicletas activas disponibles';
+      selectBici.appendChild(opt);
     }
+
   } catch (error) {
-    console.error("Error al verificar reserva activa", error);
-    alert("Error al verificar estado de tu bicicleta.");
-    form.style.display = "none";
-    return;
+    alert("Error al cargar bicicletas.");
+    console.error(error);
   }
 
-  // Enviar el reporte si sí tiene bicicleta activa
-  form.addEventListener("submit", async (e) => {
+  // Mostrar info al seleccionar bicicleta
+  selectBici.addEventListener('change', () => {
+    const bici = bicicletasMap[selectBici.value];
+    if (bici) {
+      infoBicicleta.textContent = `Estado: ${bici.estado} | Ubicación: ${bici.terminal || 'Sin asignar'}`;
+    } else {
+      infoBicicleta.textContent = '';
+    }
+  });
+
+  // Envío del formulario
+  document.getElementById('formProblema').addEventListener('submit', async (e) => {
     e.preventDefault();
-    const problema = document.getElementById("problema").value;
+
+    const datos = {
+      usuario_id: usuario.id,
+      bicicleta_id: selectBici.value,
+      tipo_problema: document.getElementById('tipo_problema').value,
+      descripcion: document.getElementById('descripcion').value
+    };
 
     try {
-      const res = await fetch(`http://localhost:5000/api/reportar_problema`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          usuario_id: usuario.id,
-          descripcion: problema
-        })
+      const res = await fetch('http://localhost:5000/api/reportar-danio', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(datos)
       });
 
       const resultado = await res.json();
       alert(resultado.message);
 
       if (resultado.success) {
-        window.location.href = "dashboard.html";
+        window.location.href = 'dashboard.html';
       }
+
     } catch (error) {
-      console.error("Error al reportar problema", error);
-      alert("Ocurrió un error al enviar el reporte.");
+      alert("Error al reportar el problema.");
+      console.error(error);
     }
   });
 });

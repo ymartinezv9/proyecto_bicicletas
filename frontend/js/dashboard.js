@@ -26,6 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <li><a href="disponibilidad.html">Consultar Disponibilidad</a></li>
           <li><a href="espacios.html">Verificar Espacio para Devolución</a></li>
           <li><a href="rutas.html">Rutas y Clima</a></li>
+          <li><a href="reportar_danio.html">Reportar Bicicleta Dañada</a></li>
 
         </ul>
       `;

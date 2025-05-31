@@ -195,6 +195,19 @@ class ReservaModel:
         self.db.commit()
         return {"success": True, "message": "Reporte enviado correctamente."}
 
+    def reportarBicicletaDanada(self, usuario_id, bicicleta_id, tipo_problema, descripcion):
+        try:
+            self.cursor.execute("""
+                INSERT INTO reportes_problemas (usuario_id, bicicleta_id, tipo_problema, descripcion)
+                VALUES (%s, %s, %s, %s)
+            """, (usuario_id, bicicleta_id, tipo_problema, descripcion))
+
+            self.cursor.execute("UPDATE bicicletas SET estado = 'Mantenimiento' WHERE id = %s", (bicicleta_id,))
+            self.db.commit()
+
+            return {"success": True, "message": "Bicicleta reportada como dañada y marcada en mantenimiento."}
+        except Exception as e:
+            return {"success": False, "message": str(e)}
 
 
     def cerrarConexion(self):

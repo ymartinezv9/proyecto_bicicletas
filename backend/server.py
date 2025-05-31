@@ -175,6 +175,31 @@ def rutas_sugeridas():
     modelo.cerrarConexion()
     return jsonify(rutas)
 
+@app.route('/api/reportar-danio', methods=['POST'])
+def reportar_danio():
+    datos = request.json
+    return jsonify(reservaCtrl.reportarDanioBicicleta(
+        datos['usuario_id'],
+        datos['bicicleta_id'],
+        datos['tipo_problema'],
+        datos['descripcion']
+    ))
+
+@app.route('/api/bicicletas/activas', methods=['GET'])
+def obtener_bicicletas_activas():
+    from models.reservaModel import ReservaModel
+    modelo = ReservaModel()
+    query = """
+        SELECT b.id, b.codigo, b.estado, t.nombre AS terminal
+        FROM bicicletas b
+        LEFT JOIN terminales t ON b.terminal_id = t.id
+        WHERE b.estado IN ('Disponible', 'En Uso')
+    """
+    modelo.cursor.execute(query)
+    bicicletas = modelo.cursor.fetchall()
+    modelo.cerrarConexion()
+    return jsonify(bicicletas)
+
 
 
 if __name__ == '__main__':

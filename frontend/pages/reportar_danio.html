@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Reportar Bicicleta Dañada</title>
+  <link rel="stylesheet" href="../css/estilos.css">
+</head>
+<body>
+  <div class="form-container">
+    <h2>Reportar Bicicleta Dañada</h2>
+    <form id="formDanio">
+      <label>ID de Bicicleta:</label>
+      <input type="number" id="bicicleta_id" required>
+
+      <label>Tipo de Problema:</label>
+      <select id="tipo_problema" required>
+        <option value="Frenos">Frenos</option>
+        <option value="Cadena">Cadena</option>
+        <option value="Llantas">Llantas</option>
+        <option value="Otro">Otro</option>
+      </select>
+
+      <label>Descripción:</label>
+      <textarea id="descripcion" required></textarea>
+
+      <button type="submit">Enviar Reporte</button>
+    </form>
+    <p><a href="dashboard.html">Volver al Panel</a></p>
+  </div>
+  <script src="../js/reportar_danio.js"></script>
+</body>
+</html>

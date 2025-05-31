@@ -8,20 +8,28 @@
 <body>
   <div class="form-container">
     <h2>Reportar Problema con Bicicleta</h2>
+      <form id="formProblema">
+        <label>Selecciona Bicicleta:</label>
+        <select id="bicicleta_id" required>
+          <option value="">-- Selecciona una bicicleta --</option>
+        </select>
 
-    <form id="formReporte">
-      <label for="problema">Selecciona el problema:</label>
-      <select id="problema" required>
-        <option value="">-- Elige una opción --</option>
-        <option value="Frenos">Frenos</option>
-        <option value="Llantas">Llantas</option>
-        <option value="Cadena">Cadena</option>
-        <option value="Manubrio">Manubrio</option>
-        <option value="Otro">Otro</option>
-      </select>
+        <label>Tipo de Problema:</label>
+        <select id="tipo_problema" required>
+          <option value="Frenos">Frenos</option>
+          <option value="Cadena">Cadena</option>
+          <option value="Llantas">Llantas</option>
+          <option value="Otro">Otro</option>
+        </select>
 
-      <button type="submit">Enviar Reporte</button>
-    </form>
+        <div id="infoBicicleta" style="margin-top: 10px; font-style: italic;"></div>
+
+
+        <label>Descripción:</label>
+        <textarea id="descripcion" required></textarea>
+
+        <button type="submit">Enviar Reporte</button>
+      </form>
 
     <p><a href="dashboard.html">Volver al Panel</a></p>
   </div>

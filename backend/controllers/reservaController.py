@@ -51,6 +51,8 @@ class ReservaController:
         resultado = self.reservaModel.cambiarDestino(usuario_id, nueva_terminal_id)
         self.reservaModel.cerrarConexion()
         return resultado
+    
+
     def obtenerReservaActiva(self, usuario_id):
         reserva = self.reservaModel.obtenerReservaActivaConDestino(usuario_id)
         self.reservaModel.cerrarConexion()
@@ -72,3 +74,9 @@ class ReservaController:
         resultado = self.reservaModel.guardarReporte(usuario_id, descripcion)
         self.reservaModel.cerrarConexion()
         return resultado
+
+    def reportarDanioBicicleta(self, usuario_id, bicicleta_id, tipo_problema, descripcion):
+        resultado = self.reservaModel.reportarBicicletaDanada(usuario_id, bicicleta_id, tipo_problema, descripcion)
+        self.reservaModel.cerrarConexion()
+        return resultado 
+    
