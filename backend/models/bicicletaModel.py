@@ -59,7 +59,10 @@ class BicicletaModel:
         self.cursor.execute(query)
         return self.cursor.fetchall()
 
-
+    def obtenerBicicletasEnMantenimiento(self):
+        query = "SELECT * FROM bicicletas WHERE estado = 'Mantenimiento'"
+        self.cursor.execute(query)
+        return self.cursor.fetchall()
 
     def cerrarConexion(self):
         self.cursor.close()

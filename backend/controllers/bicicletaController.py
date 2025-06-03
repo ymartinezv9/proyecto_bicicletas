@@ -34,3 +34,8 @@ class BicicletaController:
             return {"success": False, "message": "No hay ubicaciones registradas."}
         
         return {"success": True, "ubicaciones": ubicaciones}
+    
+    def bicicletasEnMantenimiento(self):
+        resultado = self.bicicletaModel.obtenerBicicletasEnMantenimiento()
+        self.bicicletaModel.cerrarConexion()
+        return {"success": True, "bicicletas": resultado}

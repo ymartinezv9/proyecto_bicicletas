@@ -200,6 +200,12 @@ def obtener_bicicletas_activas():
     modelo.cerrarConexion()
     return jsonify(bicicletas)
 
+@app.route('/api/bicicletas/mantenimiento/<int:tecnico_id>', methods=['GET'])
+def ver_bicicletas_mantenimiento(tecnico_id):
+    # Opcionalmente podrías validar si el usuario es Técnico
+    from controllers.bicicletaController import BicicletaController
+    controller = BicicletaController()
+    return jsonify(controller.bicicletasEnMantenimiento())
 
 
 

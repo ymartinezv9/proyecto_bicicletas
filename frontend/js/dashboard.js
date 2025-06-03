@@ -27,16 +27,18 @@ document.addEventListener('DOMContentLoaded', () => {
           <li><a href="espacios.html">Verificar Espacio para Devolución</a></li>
           <li><a href="rutas.html">Rutas y Clima</a></li>
           <li><a href="reportar_danio.html">Reportar Bicicleta Dañada</a></li>
+          <li><a href="soporte.html">Contactar Soporte</a></li>
+
 
         </ul>
       `;
       break;
 
 
-    case 'Técnico':
+    case 'Tecnico':
       opciones.innerHTML = `
         <ul>
-          <li><a href="#">Reportes Técnicos</a></li>
+          <li><a href="bicicletas_mantenimiento.html">Bicicletas en Mantenimiento</a></li>
           <li><a href="#">Revisiones</a></li>
         </ul>
       `;
