@@ -33,8 +33,6 @@ document.addEventListener('DOMContentLoaded', () => {
       break;
 
 
-
-
     case 'Técnico':
       opciones.innerHTML = `
         <ul>
@@ -46,11 +44,13 @@ document.addEventListener('DOMContentLoaded', () => {
     case 'Administrador':
       opciones.innerHTML = `
         <ul>
+          <li><a href="estado_bicicleta.html">Estado de Bicicletas</a></li>
           <li><a href="#">Estadísticas</a></li>
           <li><a href="#">Bloqueos</a></li>
         </ul>
       `;
       break;
+
     default:
       opciones.innerHTML = "<p>Rol no reconocido.</p>";
   }

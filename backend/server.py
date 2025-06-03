@@ -156,20 +156,20 @@ def rutas_sugeridas():
     from models.terminalModel import TerminalModel
     modelo = TerminalModel()
     query = """
-    SELECT 
-      t1.nombre AS origen,
-      t2.nombre AS destino,
-      t1.latitud AS lat_origen,
-      t1.longitud AS lon_origen,
-      t2.latitud AS lat_destino,
-      t2.longitud AS lon_destino
-    FROM terminales t1
-    JOIN terminales t2 ON t1.id < t2.id
-    WHERE
-      (SELECT COUNT(*) FROM bicicletas WHERE terminal_id = t1.id AND estado = 'Disponible') > 0
-      AND (SELECT capacidad - ocupadas FROM terminales WHERE id = t2.id) > 0
-    LIMIT 5
-    """
+        SELECT 
+        t1.nombre AS origen,
+        t2.nombre AS destino,
+        t1.latitud AS lat_origen,
+        t1.longitud AS lon_origen,
+        t2.latitud AS lat_destino,
+        t2.longitud AS lon_destino
+        FROM terminales t1
+        JOIN terminales t2 ON t1.id < t2.id
+        WHERE
+        (SELECT COUNT(*) FROM bicicletas WHERE terminal_id = t1.id AND estado = 'Disponible') > 0
+        AND (SELECT capacidad - ocupadas FROM terminales WHERE id = t2.id) > 0
+        LIMIT 5
+        """
     modelo.cursor.execute(query)
     rutas = modelo.cursor.fetchall()
     modelo.cerrarConexion()
@@ -199,6 +199,7 @@ def obtener_bicicletas_activas():
     bicicletas = modelo.cursor.fetchall()
     modelo.cerrarConexion()
     return jsonify(bicicletas)
+
 
 
 
