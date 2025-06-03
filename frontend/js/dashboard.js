@@ -28,8 +28,6 @@ document.addEventListener('DOMContentLoaded', () => {
           <li><a href="rutas.html">Rutas y Clima</a></li>
           <li><a href="reportar_danio.html">Reportar Bicicleta Dañada</a></li>
           <li><a href="soporte.html">Contactar Soporte</a></li>
-
-
         </ul>
       `;
       break;
@@ -43,9 +41,20 @@ document.addEventListener('DOMContentLoaded', () => {
         </ul>
       `;
       break;
+
+    case 'Soporte':
+      opciones.innerHTML = `
+        <ul>
+          <li><a href="mensajes_soporte.html">Ver Mensajes de Soporte</a></li>
+          <li><a href="#">Desbloquear bicicletas</a></li>
+        </ul>
+      `;
+      break;
+      
     case 'Administrador':
       opciones.innerHTML = `
         <ul>
+          <li><a href="redistribucion.html">Alertas de Redistribución</a></li>
           <li><a href="estado_bicicleta.html">Estado de Bicicletas</a></li>
           <li><a href="#">Estadísticas</a></li>
           <li><a href="#">Bloqueos</a></li>

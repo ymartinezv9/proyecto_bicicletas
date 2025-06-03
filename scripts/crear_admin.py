@@ -6,12 +6,12 @@ from models.usuarioModel import UsuarioModel, hashPassword  # 👈 importante
 def crear_admin():
     usuarioModel = UsuarioModel()
 
-    nombre = "Admin Inicial"
-    correo = "l@gmail.com"
-    cui = "1234567890000"
+    nombre = "soporte Inicial"
+    correo = "y@gmail.com"
+    cui = "1234567890002"
     telefono = "1234-5678"
     contrasena = "12345"
-    tipo = "Administrador"
+    tipo = "Soporte"
 
     # Hashear explícitamente
     hashed = hashPassword(contrasena)

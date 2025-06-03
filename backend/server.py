@@ -213,8 +213,31 @@ def enviar_mensaje_soporte():
     datos = request.json
     from controllers.soporteController import SoporteController
     controller = SoporteController()
-    return jsonify(controller.enviarMensaje(datos['usuario_id'], datos['asunto'], datos['mensaje']))
+    return jsonify(controller.enviarMensajeSoporte(datos['usuario_id'], datos['asunto'], datos['mensaje']))
 
+@app.route('/api/soporte/mensajes', methods=['GET'])
+def obtener_mensajes_soporte():
+    from controllers.soporteController import SoporteController
+    controller = SoporteController()
+    return jsonify(controller.verMensajesPendientes())
+
+@app.route('/api/soporte/mensaje/<int:mensaje_id>/atender', methods=['PUT'])
+def atender_mensaje_soporte(mensaje_id):
+    from controllers.soporteController import SoporteController
+    controller = SoporteController()
+    return jsonify(controller.atenderMensaje(mensaje_id))
+
+@app.route('/api/soporte/mensajes/usuario/<int:usuario_id>', methods=['GET'])
+def ver_mensajes_usuario(usuario_id):
+    from controllers.soporteController import SoporteController
+    controller = SoporteController()
+    return jsonify(controller.verMensajesUsuario(usuario_id))
+
+@app.route('/api/terminales/alertas', methods=['GET'])
+def alertas_disponibilidad():
+    from controllers.terminalController import TerminalController
+    controller = TerminalController()
+    return jsonify(controller.verificarRedistribucion())
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
