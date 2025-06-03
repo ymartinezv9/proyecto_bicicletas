@@ -39,3 +39,13 @@ class BicicletaController:
         resultado = self.bicicletaModel.obtenerBicicletasEnMantenimiento()
         self.bicicletaModel.cerrarConexion()
         return {"success": True, "bicicletas": resultado}
+    
+    def obtenerBicicletasDisponibles(self):
+        data = self.bicicletaModel.bicicletasDisponibles()
+        self.bicicletaModel.cerrarConexion()
+        return {"success": True, "bicicletas": data}
+
+    def mover(self, bicicleta_id, terminal_id):
+        resultado = self.bicicletaModel.moverBicicleta(bicicleta_id, terminal_id)
+        self.bicicletaModel.cerrarConexion()
+        return resultado

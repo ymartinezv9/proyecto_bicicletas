@@ -239,6 +239,19 @@ def alertas_disponibilidad():
     controller = TerminalController()
     return jsonify(controller.verificarRedistribucion())
 
+@app.route('/api/bicicletas/disponibles', methods=['GET'])
+def bicicletas_disponibles():
+    from controllers.bicicletaController import BicicletaController
+    ctrl = BicicletaController()
+    return jsonify(ctrl.obtenerBicicletasDisponibles())
+
+@app.route('/api/bicicletas/mover', methods=['POST'])
+def mover_bicicleta():
+    datos = request.json
+    from controllers.bicicletaController import BicicletaController
+    ctrl = BicicletaController()
+    return jsonify(ctrl.mover(datos['bicicleta_id'], datos['terminal_id']))
+
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
  

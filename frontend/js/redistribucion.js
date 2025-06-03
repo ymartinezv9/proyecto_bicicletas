@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             <td>${t.nombre}</td>
             <td>${t.capacidad}</td>
             <td>${t.ocupadas}</td>
-            <td style="color:red;">${t.porcentaje_ocupadas}%</td>
+            <td style="color:red;">${t.ocupadas/t.capacidad}%</td>
           </tr>
         `;
         tbody.innerHTML += row;
