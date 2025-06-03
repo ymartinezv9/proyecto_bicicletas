@@ -208,6 +208,13 @@ def ver_bicicletas_mantenimiento(tecnico_id):
     return jsonify(controller.bicicletasEnMantenimiento())
 
 
+@app.route('/api/soporte/mensaje', methods=['POST'])
+def enviar_mensaje_soporte():
+    datos = request.json
+    from controllers.soporteController import SoporteController
+    controller = SoporteController()
+    return jsonify(controller.enviarMensaje(datos['usuario_id'], datos['asunto'], datos['mensaje']))
+
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
