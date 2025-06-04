@@ -54,11 +54,14 @@ document.addEventListener('DOMContentLoaded', () => {
     case 'Administrador':
       opciones.innerHTML = `
         <ul>
-          <li><a href="mover_bicicletas.html">Mover Bicicleta</a></li>
-          <li><a href="redistribucion.html">Alertas de Redistribución</a></li>
           <li><a href="estado_bicicleta.html">Estado de Bicicletas</a></li>
-          <li><a href="#">Estadísticas</a></li>
+          
+          <li><a href="mover_bicicletas.html">Mover Bicicleta</a></li>
+          
+          
           <li><a href="#">Bloqueos</a></li>
+          <li><a href="#">Estadísticas</a></li>
+          
         </ul>
       `;
       break;
