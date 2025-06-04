@@ -252,6 +252,14 @@ def mover_bicicleta():
     ctrl = BicicletaController()
     return jsonify(ctrl.mover(datos['bicicleta_id'], datos['terminal_id']))
 
+
+@app.route('/api/bicicletas/estado', methods=['GET'])
+def estado_bicicletas():
+    from controllers.bicicletaController import BicicletaController
+    ctrl = BicicletaController()
+    return jsonify(ctrl.obtenerEstadoBicicletas())
+
+
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
  

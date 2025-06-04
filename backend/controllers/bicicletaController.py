@@ -26,6 +26,7 @@ class BicicletaController:
         
         return {"success": True, "bicicletas": bicicletas}
 
+
     def verUbicacionTiempoReal(self):
         ubicaciones = self.bicicletaModel.obtenerUbicaciones()
         self.bicicletaModel.cerrarConexion()
@@ -49,3 +50,8 @@ class BicicletaController:
         resultado = self.bicicletaModel.moverBicicleta(bicicleta_id, terminal_id)
         self.bicicletaModel.cerrarConexion()
         return resultado
+    
+    def obtenerEstadoBicicletas(self):
+        data = self.bicicletaModel.estadoBicicletas()
+        self.bicicletaModel.cerrarConexion()
+        return {"success": True, "bicicletas": data}

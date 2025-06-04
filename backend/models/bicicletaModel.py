@@ -35,6 +35,7 @@ class BicicletaModel:
         self.cursor.execute(query)
         return self.cursor.fetchall()
     
+    
     def obtenerUbicaciones(self):
         self.db = DBConnection().conectar()
         self.cursor = self.db.cursor(dictionary=True)
@@ -101,6 +102,16 @@ class BicicletaModel:
 
         self.db.commit()
         return {"success": True, "message": "Bicicleta movida exitosamente."}
+
+
+    def estadoBicicletas(self):
+        query = """
+        SELECT b.id, b.codigo, b.estado, t.nombre AS terminal
+        FROM bicicletas b
+        LEFT JOIN terminales t ON b.terminal_id = t.id
+        """
+        self.cursor.execute(query)
+        return self.cursor.fetchall()
 
 
     def cerrarConexion(self):
