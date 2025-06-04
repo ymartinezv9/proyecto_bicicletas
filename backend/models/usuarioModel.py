@@ -62,6 +62,18 @@ class UsuarioModel:
         self.cursor.execute(query, (correo,))
         self.db.commit()
 
+
+    def obtenerTodos(self):
+        query = "SELECT id, nombre, correo, tipo, estado FROM usuarios"
+        self.cursor.execute(query)
+        return self.cursor.fetchall()
+
+    def cambiarEstado(self, usuario_id, nuevo_estado):
+        query = "UPDATE usuarios SET estado = %s WHERE id = %s"
+        self.cursor.execute(query, (nuevo_estado, usuario_id))
+        self.db.commit()
+
+
     def cerrarConexion(self):
         self.cursor.close()
         self.db.close()

@@ -260,6 +260,21 @@ def estado_bicicletas():
     return jsonify(ctrl.obtenerEstadoBicicletas())
 
 
+
+@app.route('/api/usuarios', methods=['GET'])
+def ver_usuarios():
+    from controllers.usuarioController import UsuarioController
+    ctrl = UsuarioController()
+    return jsonify(ctrl.listarUsuarios())
+
+@app.route('/api/usuarios/estado', methods=['POST'])
+def cambiar_estado_usuario():
+    datos = request.json
+    from controllers.usuarioController import UsuarioController
+    ctrl = UsuarioController()
+    return jsonify(ctrl.modificarEstado(datos['usuario_id'], datos['estado']))
+
+
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
  

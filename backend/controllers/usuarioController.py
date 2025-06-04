@@ -63,3 +63,13 @@ class UsuarioController:
             else:
                 self.usuarioModel.cerrarConexion()
                 return {"success": False, "message": f"Contraseña incorrecta. Intentos: {intentos}/3"}
+
+    def listarUsuarios(self):
+        usuarios = self.usuarioModel.obtenerTodos()
+        self.usuarioModel.cerrarConexion()
+        return {"success": True, "usuarios": usuarios}
+
+    def modificarEstado(self, usuario_id, nuevo_estado):
+        self.usuarioModel.cambiarEstado(usuario_id, nuevo_estado)
+        self.usuarioModel.cerrarConexion()
+        return {"success": True, "message": f"Estado actualizado a {nuevo_estado}"}

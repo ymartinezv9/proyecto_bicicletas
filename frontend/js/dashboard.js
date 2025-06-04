@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <li><a href="#">Ubicacion en tiempo real</a></li> 
           <li><a href="#">Bloqueos</a></li>
           <li><a href="mover_bicicletas.html">Mover Bicicleta</a></li>
-          <li><a href="#">Gestionar Usuarios</a></li>
+          <li><a href="gestionar_usuarios.html">Gestionar Usuarios</a></li>
           <li><a href="#">Estadísticas</a></li>
           
         </ul>
