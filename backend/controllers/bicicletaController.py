@@ -55,3 +55,13 @@ class BicicletaController:
         data = self.bicicletaModel.estadoBicicletas()
         self.bicicletaModel.cerrarConexion()
         return {"success": True, "bicicletas": data}
+
+    def verMantenimiento(self):
+        bicicletas = self.bicicletaModel.obtenerEnMantenimiento()
+        self.bicicletaModel.cerrarConexion()
+        return {"success": True, "bicicletas": bicicletas}
+
+    def cambiarEstado(self, bicicleta_id, nuevo_estado):
+        self.bicicletaModel.actualizarEstado(bicicleta_id, nuevo_estado)
+        self.bicicletaModel.cerrarConexion()
+        return {"success": True, "message": f"Bicicleta actualizada a {nuevo_estado}"}

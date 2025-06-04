@@ -113,6 +113,21 @@ class BicicletaModel:
         self.cursor.execute(query)
         return self.cursor.fetchall()
 
+    def obtenerEnMantenimiento(self):
+        query = """
+        SELECT b.id, b.codigo, b.estado, t.nombre AS terminal
+        FROM bicicletas b
+        LEFT JOIN terminales t ON b.terminal_id = t.id
+        WHERE b.estado = 'Mantenimiento'
+        """
+        self.cursor.execute(query)
+        return self.cursor.fetchall()
+
+    def actualizarEstado(self, bicicleta_id, nuevo_estado):
+        query = "UPDATE bicicletas SET estado = %s WHERE id = %s"
+        self.cursor.execute(query, (nuevo_estado, bicicleta_id))
+        self.db.commit()
+
 
     def cerrarConexion(self):
         self.cursor.close()

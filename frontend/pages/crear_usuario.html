@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Crear Usuario</title>
+  <link rel="stylesheet" href="../css/estilos.css">
+</head>
+<body>
+  <div class="form-container">
+    <h2>Crear Nuevo Usuario</h2>
+    <form id="crearUsuarioForm">
+      <label>Nombre:</label>
+      <input type="text" id="nombre" required>
+
+      <label>Correo:</label>
+      <input type="email" id="correo" required>
+
+      <label>CUI:</label>
+      <input type="text" id="cui" required>
+
+      <label>Teléfono:</label>
+      <input type="text" id="telefono" required>
+
+      <label>Contraseña:</label>
+      <input type="password" id="contrasena" required>
+
+      <label>Tipo de Usuario:</label>
+      <select id="tipo" required>
+        <option value="Usuario">Usuario</option>
+        <option value="Administrador">Administrador</option>
+        <option value="Tecnico">Técnico</option>
+        <option value="Soporte">Soporte</option>
+      </select>
+
+      <button type="submit">Crear Usuario</button>
+    </form>
+    <p><a href="dashboard.html">Volver al panel</a></p>
+  </div>
+
+  <script src="../js/crear_usuario.js"></script>
+</body>
+</html>

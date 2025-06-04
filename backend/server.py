@@ -274,6 +274,19 @@ def cambiar_estado_usuario():
     ctrl = UsuarioController()
     return jsonify(ctrl.modificarEstado(datos['usuario_id'], datos['estado']))
 
+@app.route('/api/bicicletas/mantenimiento', methods=['GET'])
+def ver_mantenimiento():
+    from controllers.bicicletaController import BicicletaController
+    ctrl = BicicletaController()
+    return jsonify(ctrl.verMantenimiento())
+
+@app.route('/api/bicicletas/estado', methods=['POST'])
+def cambiar_estado_bicicleta():
+    datos = request.json
+    from controllers.bicicletaController import BicicletaController
+    ctrl = BicicletaController()
+    return jsonify(ctrl.cambiarEstado(datos['bicicleta_id'], datos['estado']))
+
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
