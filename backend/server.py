@@ -287,6 +287,25 @@ def cambiar_estado_bicicleta():
     ctrl = BicicletaController()
     return jsonify(ctrl.cambiarEstado(datos['bicicleta_id'], datos['estado']))
 
+@app.route('/api/bicicletas/historial/<int:bicicleta_id>', methods=['GET'])
+def ver_historial_bici(bicicleta_id):
+    from controllers.bicicletaController import BicicletaController
+    ctrl = BicicletaController()
+    return jsonify(ctrl.verHistorial(bicicleta_id))
+
+@app.route('/api/bicicletas/historial', methods=['POST'])
+def guardar_historial():
+    datos = request.json
+    from controllers.bicicletaController import BicicletaController
+    ctrl = BicicletaController()
+    return jsonify(ctrl.guardarHistorial(
+        datos['bicicleta_id'],
+        datos.get('usuario_id'),
+        datos['tipo'],
+        datos['descripcion'],
+        datos.get('estado', 'Pendiente')
+    ))
+
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)

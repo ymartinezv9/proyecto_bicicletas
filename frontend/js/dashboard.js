@@ -36,11 +36,10 @@ document.addEventListener('DOMContentLoaded', () => {
     case 'Tecnico':
       opciones.innerHTML = `
         <ul>
-          <li><a href="gestionar_bicicletas.html">Bicicletas en Mantenimiento</a></li>
-          <li><a href="bicicletas_mantenimiento.html">Reporte de bicicletas en Mantenimiento</a></li>
-          
-
-          <li><a href="#">Revisiones</a></li>
+          <li><a href="gestionar_bicicletas.html">Bicicletas en Mantenimiento activo</a></li>
+          <li><a href="bicicletas_mantenimiento.html">Lista de mantenimiento</a></li>
+          <li><a href="bicicletas_disponibles.html">Mantenimiento preventivo</a></li>
+          <li><a href="historial_bicicletas.html">Historial</a></li>
         </ul>
       `;
       break;

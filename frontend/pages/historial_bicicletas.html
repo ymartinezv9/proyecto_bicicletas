@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Historial de Mantenimiento</title>
+  <link rel="stylesheet" href="../css/estilos.css">
+</head>
+<body>
+  <h2>Historial de Bicicleta</h2>
+  <label>ID Bicicleta:
+    <input type="number" id="bicicletaId">
+    <button onclick="cargarHistorial()">Ver historial</button>
+  </label>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Fecha</th>
+        <th>Tipo</th>
+        <th>Descripción</th>
+        <th>Estado</th>
+        <th>Reportado por</th>
+      </tr>
+    </thead>
+    <tbody id="tablaHistorial"></tbody>
+  </table>
+  <p><a href="dashboard.html">Volver</a></p>
+
+  <script src="../js/historial_bicicleta.js"></script>
+</body>
+</html>

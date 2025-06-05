@@ -65,3 +65,14 @@ class BicicletaController:
         self.bicicletaModel.actualizarEstado(bicicleta_id, nuevo_estado)
         self.bicicletaModel.cerrarConexion()
         return {"success": True, "message": f"Bicicleta actualizada a {nuevo_estado}"}
+    
+
+    def guardarHistorial(self, bicicleta_id, usuario_id, tipo, descripcion, estado='Pendiente'):
+        self.bicicletaModel.registrarHistorial(bicicleta_id, usuario_id, tipo, descripcion, estado)
+        self.bicicletaModel.cerrarConexion()
+        return {"success": True, "message": "Historial registrado"}
+
+    def verHistorial(self, bicicleta_id):
+        historial = self.bicicletaModel.obtenerHistorialPorBicicleta(bicicleta_id)
+        self.bicicletaModel.cerrarConexion()
+        return {"success": True, "historial": historial}

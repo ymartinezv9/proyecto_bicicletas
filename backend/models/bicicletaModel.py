@@ -128,6 +128,25 @@ class BicicletaModel:
         self.cursor.execute(query, (nuevo_estado, bicicleta_id))
         self.db.commit()
 
+    def registrarHistorial(self, bicicleta_id, usuario_id, tipo, descripcion, estado='Pendiente'):
+        query = """
+        INSERT INTO historial_mantenimiento (bicicleta_id, usuario_id, tipo, descripcion, estado)
+        VALUES (%s, %s, %s, %s, %s)
+        """
+        self.cursor.execute(query, (bicicleta_id, usuario_id, tipo, descripcion, estado))
+        self.db.commit()
+
+    def obtenerHistorialPorBicicleta(self, bicicleta_id):
+        query = """
+        SELECT h.*, u.nombre AS usuario
+        FROM historial_mantenimiento h
+        LEFT JOIN usuarios u ON h.usuario_id = u.id
+        WHERE h.bicicleta_id = %s
+        ORDER BY fecha DESC
+        """
+        self.cursor.execute(query, (bicicleta_id,))
+        return self.cursor.fetchall()
+
 
     def cerrarConexion(self):
         self.cursor.close()
