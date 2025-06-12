@@ -231,7 +231,7 @@ else:
 ctrl = TerminalController()
 
 print("Disponibilidad de bicicletas por terminal")
-'''
+
 resultado = ctrl.verDisponibilidad()
 
 if resultado["success"]:
@@ -239,7 +239,7 @@ if resultado["success"]:
         print(f"- {t['nombre']} | Bicicletas disponibles: {t['ocupadas']} | Espacios libres: {t['espacios_libres']} / {t['capacidad']}")
 else:
     print(resultado["message"])
-
+'''
 
 if __name__ == "__main__":
     main()

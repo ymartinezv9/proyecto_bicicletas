@@ -76,3 +76,8 @@ class BicicletaController:
         historial = self.bicicletaModel.obtenerHistorialPorBicicleta(bicicleta_id)
         self.bicicletaModel.cerrarConexion()
         return {"success": True, "historial": historial}
+
+    def buscarHistorial(self, termino):
+        historial = self.bicicletaModel.buscarHistorialPorNombreOCodigo(termino)
+        self.bicicletaModel.cerrarConexion()
+        return {"success": True, "historial": historial}

@@ -280,12 +280,14 @@ def ver_mantenimiento():
     ctrl = BicicletaController()
     return jsonify(ctrl.verMantenimiento())
 
+
 @app.route('/api/bicicletas/estado', methods=['POST'])
 def cambiar_estado_bicicleta():
     datos = request.json
     from controllers.bicicletaController import BicicletaController
     ctrl = BicicletaController()
     return jsonify(ctrl.cambiarEstado(datos['bicicleta_id'], datos['estado']))
+
 
 @app.route('/api/bicicletas/historial/<int:bicicleta_id>', methods=['GET'])
 def ver_historial_bici(bicicleta_id):
@@ -306,7 +308,13 @@ def guardar_historial():
         datos.get('estado', 'Pendiente')
     ))
 
+@app.route('/api/bicicletas/historial/buscar/<string:termino>', methods=['GET'])
+def buscar_historial(termino):
+    from controllers.bicicletaController import BicicletaController
+    ctrl = BicicletaController()
+    return jsonify(ctrl.buscarHistorial(termino))
+
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    app.run(host='0.0.0.0', port=5000)
  

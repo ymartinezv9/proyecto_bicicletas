@@ -147,6 +147,19 @@ class BicicletaModel:
         self.cursor.execute(query, (bicicleta_id,))
         return self.cursor.fetchall()
 
+    def buscarHistorialPorNombreOCodigo(self, termino):
+        query = """
+        SELECT h.*, u.nombre AS usuario, b.codigo AS bicicleta
+        FROM historial_mantenimiento h
+        JOIN bicicletas b ON h.bicicleta_id = b.id
+        LEFT JOIN usuarios u ON h.usuario_id = u.id
+        WHERE b.codigo LIKE %s
+        OR b.id IN (SELECT id FROM bicicletas WHERE codigo LIKE %s)
+        ORDER BY h.fecha DESC
+        """
+        like_term = f"%{termino}%"
+        self.cursor.execute(query, (like_term, like_term))
+        return self.cursor.fetchall()
 
     def cerrarConexion(self):
         self.cursor.close()

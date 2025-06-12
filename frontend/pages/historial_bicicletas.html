@@ -6,26 +6,27 @@
   <link rel="stylesheet" href="../css/estilos.css">
 </head>
 <body>
-  <h2>Historial de Bicicleta</h2>
-  <label>ID Bicicleta:
-    <input type="number" id="bicicletaId">
-    <button onclick="cargarHistorial()">Ver historial</button>
+  <h2>Historial de Mantenimiento de Bicicletas</h2>
+  <label>Buscar por código:
+    <input type="text" id="busqueda" placeholder="Ej. BIKE001">
+    <button onclick="buscar()">Buscar</button>
   </label>
 
   <table>
     <thead>
       <tr>
-        <th>Fecha</th>
+        <th>Bicicleta</th>
         <th>Tipo</th>
         <th>Descripción</th>
         <th>Estado</th>
         <th>Reportado por</th>
+        <th>Fecha</th>
       </tr>
     </thead>
     <tbody id="tablaHistorial"></tbody>
   </table>
   <p><a href="dashboard.html">Volver</a></p>
 
-  <script src="../js/historial_bicicleta.js"></script>
+  <script src="../js/historial_bicicletas.js"></script>
 </body>
 </html>

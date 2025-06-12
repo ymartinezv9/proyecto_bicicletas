@@ -41,16 +41,36 @@ async function marcarMantenimiento(id) {
   if (!confirm("¿Enviar esta bicicleta a mantenimiento preventivo?")) return;
 
   try {
-    const res = await fetch('http://localhost:5000/api/bicicletas/estado', {
+    // 1. Cambiar estado de la bicicleta
+    const cambioEstado = await fetch('http://localhost:5000/api/bicicletas/estado', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ bicicleta_id: id, estado: 'Mantenimiento' })
     });
 
-    const result = await res.json();
-    alert(result.message);
+    const resultadoCambio = await cambioEstado.json();
+    alert(resultadoCambio.message);
+
+    // 2. Registrar historial de mantenimiento preventivo
+    const usuario = JSON.parse(localStorage.getItem('usuario'));
+
+    await fetch('http://localhost:5000/api/bicicletas/historial', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        bicicleta_id: id,
+        usuario_id: usuario.id,
+        tipo: 'Preventivo',
+        descripcion: 'Mantenimiento preventivo realizado por técnico',
+        estado: 'Revisado'
+      })
+    });
+
     location.reload();
+
   } catch (error) {
-    console.error("Error al cambiar estado", error);
+    console.error("Error al procesar mantenimiento", error);
+    alert("Ocurrió un error al enviar a mantenimiento.");
   }
 }
+
